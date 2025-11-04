@@ -1,0 +1,25 @@
+name: IaC Validation and What-If Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  validate-and-whatif:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Azure CLI
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+      - name: Validate Bicep
+        working-directory: ./iac
+        run: az bicep build --file main.bicep
+
+      - name: Simulate Deployment (What-If)
+        run: |
+          az group create -n rg-josh-ci -l eastus
+          az deployment group what-if --resource-group rg-josh-ci --template-file ./iac/main.bicep
