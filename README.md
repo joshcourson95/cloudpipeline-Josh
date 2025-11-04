@@ -16,3 +16,4 @@ Whenever code is pushed to the main branch, GitHub automatically:
 Use this repository to complete your CI/CD Challenge assignment:
 - Include screenshots of a successful `az bicep build` and GitHub Actions run.
 - Submit your reflection PDF describing your steps and what you learned.
+CI/CD test commit
